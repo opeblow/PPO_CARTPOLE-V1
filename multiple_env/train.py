@@ -20,6 +20,7 @@ def plot_results(rewards):
 def train():
     cfg=Config
     env=gym.make_vec(cfg.env_name,num_envs=cfg.num_envs,vectorization_mode="sync",disable_env_checker=True)
+    env=gym.wrappers.vector.RecordEpisodeStatistics(env)
     state_dim=env.single_observation_space.shape[0]
     action_dim=env.single_action_space.n
     agent=PPOAgent(state_dim,action_dim,cfg)
@@ -29,6 +30,7 @@ def train():
     for update in pbar:
         for _ in range(cfg.n_steps):
             action,log_prob,value=agent.select_action(state)
+            action=action.astype(np.int64).flatten()
             next_state,reward,term,trunc,info=env.step(action)
             done=np.logical_or(term,trunc)
             agent.buffer.add(state,action,reward,done,log_prob,value)
@@ -36,7 +38,13 @@ def train():
             if "final_info" in info:
                 for item in info["final_info"]:
                     if item and "episode" in item:
-                        all_episode_rewards.append(item["episode"]["r"])
+                        res=item["episode"]["r"]
+                        all_episode_rewards.append(res)
+                        print(f"Episode Reward:{res}")
+        if all_episode_rewards:
+            avg_r=np.mean(all_episode_rewards[-10:])
+            pbar.set_postfix(avg_reward=f"{avg_r:.2f}")
+                        
         pbar.update(1)                
         agent.update(state)
         if all_episode_rewards:
