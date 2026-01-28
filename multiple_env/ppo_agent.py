@@ -28,7 +28,7 @@ class PPOAgent:
         with torch.no_grad():
             action, log_prob, _ = self.policy.act(state_tensor)
             value=self.policy.critic(state_tensor)
-        return action.cpu().numpy(), log_prob.cpu().numpy(), value.cpu().numpy().flatten()
+        return action.cpu().numpy().flatten(), log_prob.cpu().numpy(), value.cpu().numpy().flatten()
     
     def update(self,next_state):
         next_state_tensor=torch.from_numpy(next_state).float().to(self.device)

@@ -7,7 +7,7 @@ class RolloutBuffer:
         self.device = device
         self.num_envs=num_envs
         self.states = np.zeros((buffer_size,num_envs, state_dim), dtype=np.float32)
-        self.actions = np.zeros((buffer_size,num_envs,action_dim),dtype=np.float32)
+        self.actions = np.zeros((buffer_size,num_envs),dtype=np.float32)
         self.rewards = np.zeros((buffer_size,num_envs),dtype=np.float32)
         self.dones = np.zeros((buffer_size,num_envs),dtype=np.float32)
         self.log_probs = np.zeros((buffer_size,num_envs),dtype=np.float32)
@@ -34,9 +34,9 @@ class RolloutBuffer:
 
     def compute_advantages_and_returns(self, last_value, gamma, gae_lambda):
         last_gae_lambda = 0
-        for step in reversed(range(self.size)):
-            if step == self.size - 1:
-                next_non_terminal = 1.0 - 0.0
+        for step in reversed(range(self.buffer_size)):
+            if step == self.buffer_size - 1:
+                next_non_terminal = 1.0 - self.dones[step ]
                 next_value = last_value
             else:
                 next_non_terminal = 1.0 - self.dones[step + 1]
