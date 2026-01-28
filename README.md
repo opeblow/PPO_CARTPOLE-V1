@@ -120,7 +120,7 @@ This repository provides two complete PPO implementations optimized for differen
 bash
 # Clone repository
 git clone https://github.com/opeblow/PPO_CARTPOLVE-V1.git
-cd ppo-framework
+
 
 # Install dependencies
 pip install -r requirements.txt
