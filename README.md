@@ -201,11 +201,10 @@ pytest tests/test_network.py -v
 
 ```bibtex
 @software{ppo_cartpole_2026,
-  author = {Your Name},
+  author = {Mobolaji Opeyemi Bolatito },
   title = {PPO CartPole-v1: Production-Ready PPO Implementation},
   year = {2026},
-  publisher = {GitHub},
-  url = {https://github.com/username/ppo-cartpole}
+  url = {https://github.com/opeblow/PPO_CARTPOLE-V1.git
 }
 ```
 
