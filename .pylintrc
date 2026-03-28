@@ -1,0 +1,16 @@
+[MASTER]
+ignore=CVS,E501,W503
+max-line-length=88
+extension-pkg-whitelist=torch,numpy
+
+[MESSAGES CONTROL]
+disable=C0111,C0103,R0913,R0914
+
+[BASIC]
+good-names=i,j,k,x,y,z,st,nd,rd,th,id,ex,df,op,fd
+
+[DESIGN]
+max-args=10
+max-locals=20
+max-returns=8
+max-branches=15
