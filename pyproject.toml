@@ -10,7 +10,7 @@ readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.8"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"},
+    {name = "Mobolaji Opeyemi Bolatito", email = "opeblow2021@gmail.com"},
 ]
 keywords = ["reinforcement-learning", "ppo", "gymnasium", "cartpole"]
 classifiers = [
